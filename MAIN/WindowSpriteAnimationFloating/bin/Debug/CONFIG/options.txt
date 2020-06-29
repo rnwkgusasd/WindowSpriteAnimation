@@ -1,0 +1,3 @@
+IMAGEPATH=C:\Users\LG\Desktop\Images\google_docs_48px.png
+SPRITECOUNT=1
+SPRITEROWCOUNT=1
