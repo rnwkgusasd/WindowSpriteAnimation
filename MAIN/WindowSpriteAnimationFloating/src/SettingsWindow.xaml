@@ -9,7 +9,7 @@
         WindowStyle="None" Loaded="Window_Loaded">
     <Grid Background="BlanchedAlmond">
         <Grid VerticalAlignment="Top" Height="30" Background="RosyBrown">
-            <Image Source="C:\Users\LG\Desktop\C#Proj\MAIN\WindowSpriteAnimationFloating\Resource\icons8_asteroid_64.png" HorizontalAlignment="Left" VerticalAlignment="Center"
+            <Image Source="C:\Users\LG\Desktop\C#Proj\WindowSpriteAnimation\MAIN\WindowSpriteAnimationFloating\Resource\icons8_asteroid_64.png" HorizontalAlignment="Left" VerticalAlignment="Center"
                    Width="25" Height="25" Margin="5, 0, 0, 0" />
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Text="Settings" Margin="45, 0, 0, 0"
                        TextBlock.FontFamily="Century Gothic" TextBlock.FontWeight="Bold" TextBlock.FontSize="18" Foreground="White" />
@@ -33,6 +33,9 @@
 
             <TextBlock Text="Sprite Row Count" Margin="5,80,0,118" Foreground="RosyBrown"/>
             <TextBox Name="SpriteRowCount" Width="100" Height="20" FontSize="9" VerticalAlignment="Top" Margin="270, 80, 0, 0" />
+
+            <TextBlock Text="Sprite Next Time (seconds)" Margin="5,130,0,68" Foreground="RosyBrown"/>
+            <TextBox Name="SpriteNextTime" Width="100" Height="20" FontSize="9" VerticalAlignment="Top" Margin="270, 130, 0, 0" />
 
             <Button Width="100" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0, 0, 5, 5"
                     Background="RosyBrown" Foreground="White" BorderThickness="0" Click="Click_SaveButton">

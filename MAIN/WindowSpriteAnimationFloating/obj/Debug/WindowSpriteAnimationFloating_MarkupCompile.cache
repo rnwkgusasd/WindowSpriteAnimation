@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\LG\Desktop\C#Proj\MAIN\WindowSpriteAnimationFloating\obj\Debug\
+C:\Users\LG\Desktop\C#Proj\WindowSpriteAnimation\MAIN\WindowSpriteAnimationFloating\obj\Debug\
 WindowSpriteAnimationFloating
 none
 false
 DEBUG;TRACE
-C:\Users\LG\Desktop\C#Proj\MAIN\WindowSpriteAnimationFloating\App.xaml
+C:\Users\LG\Desktop\C#Proj\WindowSpriteAnimation\MAIN\WindowSpriteAnimationFloating\App.xaml
 2-1681451324
 
-8-1745837296
+7-991267512
 15-1358686748
 src\MainWindow.xaml;src\SettingsWindow.xaml;
 
-True
+False
 

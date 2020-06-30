@@ -39,7 +39,7 @@ namespace WindowSpriteAnimationFloating
         {
             if(System.Windows.MessageBox.Show("Save?", "save", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
             {
-                string[] arr = new string[] { "IMAGEPATH=" + ImagePath.Text, "SPRITECOUNT=" + SpriteCount.Text, "SPRITEROWCOUNT=" + SpriteRowCount.Text };
+                string[] arr = new string[] { "IMAGEPATH=" + ImagePath.Text, "SPRITECOUNT=" + SpriteCount.Text, "SPRITEROWCOUNT=" + SpriteRowCount.Text, "SPRITENEXTTIME=" + SpriteNextTime.Text };
 
                 FileInfo file = new FileInfo(System.Windows.Forms.Application.StartupPath + "\\CONFIG\\options.txt");
 
@@ -55,6 +55,7 @@ namespace WindowSpriteAnimationFloating
                 globalClass.ImagePath = ImagePath.Text;
                 globalClass.SpriteCount = int.Parse(SpriteCount.Text);
                 globalClass.SpriteRowCount = int.Parse(SpriteRowCount.Text);
+                globalClass.SpriteNextTime = double.Parse(SpriteNextTime.Text);
 
                 System.Windows.MessageBox.Show("Success!", "save", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -84,6 +85,7 @@ namespace WindowSpriteAnimationFloating
             ImagePath.Text = globalClass.ImagePath;
             SpriteCount.Text = globalClass.SpriteCount.ToString();
             SpriteRowCount.Text = globalClass.SpriteRowCount.ToString();
+            SpriteNextTime.Text = globalClass.SpriteNextTime.ToString();
         }
     }
 }
