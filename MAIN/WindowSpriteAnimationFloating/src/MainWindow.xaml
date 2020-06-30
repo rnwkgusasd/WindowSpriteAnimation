@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WindowSpriteAnimationFloating"
         mc:Ignorable="d"
-        Title="MainWindow" Height="320" Width="525"
+        Title="SPRITE" Height="320" Width="525"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
-        ShowInTaskbar="False" Topmost="True" Loaded="Window_Loaded">
+        ShowInTaskbar="False" Topmost="True" Loaded="Window_Loaded" Icon="icons8_asteroid_64.png">
     <Grid>
         <Image x:Name="SpriteImage" />
     </Grid>
