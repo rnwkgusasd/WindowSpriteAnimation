@@ -21,22 +21,35 @@ namespace WindowSpriteAnimationFloating
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Member Variables
+
+        // Original Image
         private Bitmap original;
+        // Image Frames
         private Bitmap[] frames = new Bitmap[0];
+        // Image Frames ImageSource
         private ImageSource[] imgFrame = new ImageSource[0];
 
+        // Animation Timer
         private DispatcherTimer timer;
 
+        // Frame Index
         private int frame = -1;
+
+        #endregion
+
+        #region DLL
 
         [DllImport("gdi32.dll", EntryPoint = "DeleteObject")]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool DeleteObject([In] IntPtr hObject);
+        #endregion
 
         public MainWindow()
         {
             InitializeComponent();
 
+            // Read options.txt file. Setup program
             if (File.Exists(System.Windows.Forms.Application.StartupPath + "\\CONFIG\\options.txt"))
             {
                 string[] readData = File.ReadAllLines(System.Windows.Forms.Application.StartupPath + "\\CONFIG\\options.txt").ToList().ConvertAll(x => x.Split('=')[1]).ToArray();
@@ -50,6 +63,7 @@ namespace WindowSpriteAnimationFloating
                 }
             }
 
+            // System tray icon settings
             var menu = new System.Windows.Forms.ContextMenu();
             var noti = new NotifyIcon
             {
@@ -70,6 +84,7 @@ namespace WindowSpriteAnimationFloating
                 w.ShowDialog();
                 this.Window_Loaded(this, new RoutedEventArgs());
             };
+
             var item2 = new MenuItem()
             {
                 Index = 1,
@@ -81,11 +96,14 @@ namespace WindowSpriteAnimationFloating
             noti.ContextMenu = menu;
         }
 
+        // Timer funciton.
         private void NextFrame(object sender, EventArgs e)
         {
+            // Change next image
             frame = (frame + 1) % globalClass.SpriteCount;
             SpriteImage.Source = imgFrame[frame];
 
+            // Set window size
             if (frame == 0)
             {
                 this.Width = imgFrame[frame].Width;
@@ -93,6 +111,7 @@ namespace WindowSpriteAnimationFloating
             }
         }
 
+        // Animation image locate follow to mouse point on MouseDown
         private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if(e.ChangedButton == MouseButton.Left)
@@ -103,6 +122,8 @@ namespace WindowSpriteAnimationFloating
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            frame = -1;
+
             original = System.Drawing.Image.FromFile(globalClass.ImagePath) as Bitmap;
             frames = new Bitmap[globalClass.SpriteCount];
             imgFrame = new ImageSource[globalClass.SpriteCount];
@@ -124,6 +145,7 @@ namespace WindowSpriteAnimationFloating
                 frames[i] = new Bitmap(spriteWidth, spriteHeight);
                 using (Graphics g = Graphics.FromImage(frames[i]))
                 {
+                    // Get designated position image in original image
                     g.DrawImage(original, new Rectangle(0, 0, spriteWidth, spriteHeight), new Rectangle(widthPos * spriteWidth, yHeight, spriteWidth, spriteHeight), GraphicsUnit.Pixel);
 
                     var handler = frames[i].GetHbitmap();

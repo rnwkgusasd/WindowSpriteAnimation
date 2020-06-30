@@ -26,6 +26,7 @@ namespace WindowSpriteAnimationFloating
         {
             InitializeComponent();
 
+            // Window locate => right bottom
             this.Left = Screen.PrimaryScreen.WorkingArea.Width - this.Width;
             this.Top = Screen.PrimaryScreen.WorkingArea.Height - this.Height - 50;
         }
@@ -67,7 +68,9 @@ namespace WindowSpriteAnimationFloating
         {
             try
             {
+                // Get image file path
                 OpenFileDialog dialog = new OpenFileDialog();
+                // Image file select filter
                 dialog.Filter = "Images Files(*.jpg; *.jpeg; *.gif; *.bmp; *.png)|*.jpg;*.jpeg;*.gif;*.bmp;*.png";
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
