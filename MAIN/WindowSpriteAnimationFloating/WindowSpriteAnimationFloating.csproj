@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icons8_asteroid.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -109,6 +112,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="src\icons8_asteroid_64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons8_asteroid.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
