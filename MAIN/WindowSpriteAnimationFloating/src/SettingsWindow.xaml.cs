@@ -41,6 +41,7 @@ namespace WindowSpriteAnimationFloating
             if(System.Windows.MessageBox.Show("Save?", "save", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
             {
                 string[] arr = new string[] { "IMAGEPATH=" + ImagePath.Text, "SPRITECOUNT=" + SpriteCount.Text, "SPRITEROWCOUNT=" + SpriteRowCount.Text, "SPRITENEXTTIME=" + SpriteNextTime.Text };
+                string[] manual = new string[] { "MANUALSIZECHANGE=" + cbSize.IsChecked?.ToString(), "MANUALWIDTH=" + xSize.Text, "MANUALHEIGHT=" + ySize.Text, "MANUALSTARTROW=" + rowStart.Text };
 
                 FileInfo file = new FileInfo(System.Windows.Forms.Application.StartupPath + "\\CONFIG\\options.txt");
 
@@ -50,7 +51,15 @@ namespace WindowSpriteAnimationFloating
 
                 if (file.Exists)
                 {
-                    File.WriteAllLines(file.FullName, arr);
+                    try
+                    {
+                        File.WriteAllLines(file.FullName, arr);
+                        File.AppendAllLines(file.FullName, manual);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
                 }
 
                 globalClass.ImagePath = ImagePath.Text;
@@ -60,6 +69,7 @@ namespace WindowSpriteAnimationFloating
 
                 globalClass.ManualWidth = int.Parse(xSize.Text);
                 globalClass.ManualHeight = int.Parse(ySize.Text);
+                globalClass.ManualStartRowPoint = int.Parse(rowStart.Text);
 
                 System.Windows.MessageBox.Show("Success!", "save", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -94,6 +104,17 @@ namespace WindowSpriteAnimationFloating
             SpriteNextTime.Text = globalClass.SpriteNextTime.ToString();
 
             cbSize.IsChecked = globalClass.ManualSizeChange;
+
+            if(globalClass.ManualSizeChange)
+            {
+                xSize.IsEnabled = true;
+                ySize.IsEnabled = true;
+                rowStart.IsEnabled = true;
+            }
+
+            xSize.Text = globalClass.ManualWidth.ToString();
+            ySize.Text = globalClass.ManualHeight.ToString();
+            rowStart.Text = globalClass.ManualStartRowPoint.ToString();
         }
 
         private void checkBox_Checked(object sender, RoutedEventArgs e)
@@ -102,6 +123,7 @@ namespace WindowSpriteAnimationFloating
             {
                 xSize.IsEnabled = true;
                 ySize.IsEnabled = true;
+                rowStart.IsEnabled = true;
 
                 globalClass.ManualSizeChange = true;
             } 
@@ -109,6 +131,7 @@ namespace WindowSpriteAnimationFloating
             {
                 xSize.IsEnabled = false;
                 ySize.IsEnabled = false;
+                rowStart.IsEnabled = false;
 
                 globalClass.ManualSizeChange = false;
             }

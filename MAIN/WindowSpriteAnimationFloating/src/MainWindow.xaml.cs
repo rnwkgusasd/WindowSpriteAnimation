@@ -52,14 +52,26 @@ namespace WindowSpriteAnimationFloating
             // Read options.txt file. Setup program
             if (File.Exists(System.Windows.Forms.Application.StartupPath + "\\CONFIG\\options.txt"))
             {
-                string[] readData = File.ReadAllLines(System.Windows.Forms.Application.StartupPath + "\\CONFIG\\options.txt").ToList().ConvertAll(x => x.Split('=')[1]).ToArray();
-
-                if (readData.Length == 4)
+                try
                 {
-                    globalClass.ImagePath = readData[0];
-                    globalClass.SpriteCount = int.Parse(readData[1]);
-                    globalClass.SpriteRowCount = int.Parse(readData[2]);
-                    globalClass.SpriteNextTime = double.Parse(readData[3]);
+                    string[] readData = File.ReadAllLines(System.Windows.Forms.Application.StartupPath + "\\CONFIG\\options.txt").ToList().ConvertAll(x => x.Split('=')[1]).ToArray();
+
+                    if (readData.Length == 8)
+                    {
+                        globalClass.ImagePath = readData[0];
+                        globalClass.SpriteCount = int.Parse(readData[1]);
+                        globalClass.SpriteRowCount = int.Parse(readData[2]);
+                        globalClass.SpriteNextTime = double.Parse(readData[3]);
+
+                        globalClass.ManualSizeChange = bool.Parse(readData[4]);
+                        globalClass.ManualWidth = int.Parse(readData[5]);
+                        globalClass.ManualHeight = int.Parse(readData[6]);
+                        globalClass.ManualStartRowPoint = int.Parse(readData[7]);
+                    }
+                }
+                catch (Exception ex)
+                {
+
                 }
             }
 
@@ -67,7 +79,7 @@ namespace WindowSpriteAnimationFloating
             var menu = new System.Windows.Forms.ContextMenu();
             var noti = new NotifyIcon
             {
-                Icon = new Icon(@"C:\Users\LG\Desktop\C#Proj\WindowSpriteAnimation\MAIN\WindowSpriteAnimationFloating\Resource\icons8_asteroid.ico"),
+                Icon = new Icon(@"..\..\Resource\icons8_asteroid.ico"),
                 Visible = true,
                 Text = "Sprite Animation"
             };
@@ -122,6 +134,9 @@ namespace WindowSpriteAnimationFloating
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            if (globalClass.ImagePath == "" || !File.Exists(globalClass.ImagePath))
+                globalClass.ImagePath = System.Windows.Forms.Application.StartupPath + @"\..\..\Resource\icons8_asteroid_64.png";
+
             frame = -1;
 
             original = System.Drawing.Image.FromFile(globalClass.ImagePath) as Bitmap;
@@ -144,6 +159,11 @@ namespace WindowSpriteAnimationFloating
                 int currRowCnt = i / (globalClass.SpriteCount / globalClass.SpriteRowCount);
 
                 yHeight = spriteHeight * currRowCnt;
+
+                if(globalClass.ManualSizeChange)
+                {
+                    yHeight = spriteHeight * (globalClass.ManualStartRowPoint + currRowCnt);
+                }
 
                 if(i >= (globalClass.SpriteCount / globalClass.SpriteRowCount))
                     widthPos = i - ((globalClass.SpriteCount / globalClass.SpriteRowCount) * currRowCnt);
@@ -169,6 +189,22 @@ namespace WindowSpriteAnimationFloating
             timer.Start();
 
             MouseDown += MainWindow_MouseDown;
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            if(timer != null && timer.IsEnabled)
+            {
+                timer.Stop();
+                timer = null;
+            }
+
+            GC.SuppressFinalize(this);
+        }
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized) this.WindowState = WindowState.Normal;
         }
     }
 }

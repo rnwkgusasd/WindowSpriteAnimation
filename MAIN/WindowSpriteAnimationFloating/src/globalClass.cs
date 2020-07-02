@@ -21,5 +21,6 @@ namespace WindowSpriteAnimationFloating.src
         // Manual Sprite Size X, Y Point
         public static int ManualWidth = 0;
         public static int ManualHeight = 0;
+        public static int ManualStartRowPoint = 0;
     }
 }
