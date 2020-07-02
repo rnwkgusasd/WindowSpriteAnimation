@@ -33,6 +33,9 @@ namespace WindowSpriteAnimationFloating
         // Animation Timer
         private DispatcherTimer timer;
 
+        // Window System Tray Icon
+        private NotifyIcon noti;
+
         // Frame Index
         private int frame = -1;
 
@@ -77,7 +80,7 @@ namespace WindowSpriteAnimationFloating
 
             // System tray icon settings
             var menu = new System.Windows.Forms.ContextMenu();
-            var noti = new NotifyIcon
+            noti = new NotifyIcon
             {
                 Icon = new Icon(@"..\..\Resource\icons8_asteroid.ico"),
                 Visible = true,
@@ -200,6 +203,15 @@ namespace WindowSpriteAnimationFloating
             }
 
             GC.SuppressFinalize(this);
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (noti != null)
+            {
+                noti.Visible = false;
+                noti.Icon = null;
+            }
         }
 
         private void Window_StateChanged(object sender, EventArgs e)

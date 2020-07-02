@@ -9,7 +9,7 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
-        ShowInTaskbar="False" Topmost="True" Loaded="Window_Loaded" Icon="icons8_asteroid_64.png" Closed="Window_Closed" StateChanged="Window_StateChanged">
+        ShowInTaskbar="False" Topmost="True" Loaded="Window_Loaded" Icon="icons8_asteroid_64.png" Closed="Window_Closed" StateChanged="Window_StateChanged" Closing="Window_Closing">
     <Grid>
         <Image x:Name="SpriteImage" />
     </Grid>
