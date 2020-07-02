@@ -58,6 +58,9 @@ namespace WindowSpriteAnimationFloating
                 globalClass.SpriteRowCount = int.Parse(SpriteRowCount.Text);
                 globalClass.SpriteNextTime = double.Parse(SpriteNextTime.Text);
 
+                globalClass.ManualWidth = int.Parse(xSize.Text);
+                globalClass.ManualHeight = int.Parse(ySize.Text);
+
                 System.Windows.MessageBox.Show("Success!", "save", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 this.Close();
@@ -89,6 +92,26 @@ namespace WindowSpriteAnimationFloating
             SpriteCount.Text = globalClass.SpriteCount.ToString();
             SpriteRowCount.Text = globalClass.SpriteRowCount.ToString();
             SpriteNextTime.Text = globalClass.SpriteNextTime.ToString();
+
+            cbSize.IsChecked = globalClass.ManualSizeChange;
+        }
+
+        private void checkBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if(cbSize.IsChecked != null && (bool)cbSize.IsChecked)
+            {
+                xSize.IsEnabled = true;
+                ySize.IsEnabled = true;
+
+                globalClass.ManualSizeChange = true;
+            } 
+            else
+            {
+                xSize.IsEnabled = false;
+                ySize.IsEnabled = false;
+
+                globalClass.ManualSizeChange = false;
+            }
         }
     }
 }

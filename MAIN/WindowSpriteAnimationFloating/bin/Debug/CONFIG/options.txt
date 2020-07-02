@@ -1,4 +1,4 @@
-IMAGEPATH=C:\Users\LG\Desktop\C#Proj\WindowSpriteAnimation\MAIN\WindowSpriteAnimationFloating\Resource\icons8_asteroid_64.png
-SPRITECOUNT=1
+IMAGEPATH=C:\Users\LG\Desktop\Images\sprite04.png
+SPRITECOUNT=12
 SPRITEROWCOUNT=1
-SPRITENEXTTIME=0.07
+SPRITENEXTTIME=0.05

@@ -131,6 +131,12 @@ namespace WindowSpriteAnimationFloating
             int spriteWidth = original.Width / (globalClass.SpriteCount / globalClass.SpriteRowCount);
             int spriteHeight = original.Height / globalClass.SpriteRowCount;
 
+            if(globalClass.ManualSizeChange)
+            {
+                spriteWidth = globalClass.ManualWidth;
+                spriteHeight = globalClass.ManualHeight;
+            }
+
             for (int i = 0; i < globalClass.SpriteCount; i++)
             {
                 int yHeight = 0;

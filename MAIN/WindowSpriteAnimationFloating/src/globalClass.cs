@@ -16,5 +16,10 @@ namespace WindowSpriteAnimationFloating.src
         public static int SpriteRowCount = 0;
         // Time Of Sprite Image Change Next Frame
         public static double SpriteNextTime = 0.0;
+        // Manual Sprite Size Change
+        public static bool ManualSizeChange;
+        // Manual Sprite Size X, Y Point
+        public static int ManualWidth = 0;
+        public static int ManualHeight = 0;
     }
 }

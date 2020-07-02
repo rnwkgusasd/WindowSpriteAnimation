@@ -20,7 +20,13 @@
             </Button>
         </Grid>
         <Grid HorizontalAlignment="Left" Width="120" Background="RosyBrown" Margin="0,32,0,0">
+            <CheckBox x:Name="cbSize" Content="Set Size" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White" Click="checkBox_Checked" />
 
+            <TextBlock Text="width" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10, 30, 0, 0" Foreground="White" />
+            <TextBox Name="xSize" Width="50" Height="20" FontSize="9" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="55, 30, 0, 0" IsEnabled="False" />
+
+            <TextBlock Text="height" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10, 60, 0, 0" Foreground="White" />
+            <TextBox Name="ySize" Width="50" Height="20" FontSize="9" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="55, 60, 0, 0" IsEnabled="False" />
         </Grid>
         <Grid HorizontalAlignment="Right" Width="380" Margin="0,32,0,0">
             <TextBlock Text="Image Path" Margin="5,5,0,193" Foreground="RosyBrown" />
