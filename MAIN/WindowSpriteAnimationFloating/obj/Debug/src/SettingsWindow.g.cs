@@ -116,7 +116,7 @@ namespace WindowSpriteAnimationFloating {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/WindowSpriteAnimationFloating;component/src/settingswindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/AniSpri;component/src/settingswindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\src\SettingsWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

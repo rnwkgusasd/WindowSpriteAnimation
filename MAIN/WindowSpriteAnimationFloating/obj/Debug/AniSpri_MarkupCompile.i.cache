@@ -1,4 +1,4 @@
-﻿WindowSpriteAnimationFloating
+﻿AniSpri
 
 
 winexe
@@ -12,9 +12,9 @@ DEBUG;TRACE
 C:\Users\LG\Desktop\C#Proj\WindowSpriteAnimation\MAIN\WindowSpriteAnimationFloating\App.xaml
 2-1681451324
 
-7-991267512
+8-1745837296
 15-1358686748
 src\MainWindow.xaml;src\SettingsWindow.xaml;
 
-False
+True
 

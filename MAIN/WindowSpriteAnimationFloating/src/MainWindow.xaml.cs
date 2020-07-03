@@ -48,6 +48,8 @@ namespace WindowSpriteAnimationFloating
         public static extern bool DeleteObject([In] IntPtr hObject);
         #endregion
 
+        #region Initialize
+
         public MainWindow()
         {
             InitializeComponent();
@@ -87,16 +89,19 @@ namespace WindowSpriteAnimationFloating
                 Text = "Sprite Animation"
             };
 
+            // system tray icon context menu items
             var item = new MenuItem()
             {
                 Index = 0,
                 Text = "Settings"
             };
             item.Click += (object se, EventArgs ev) => {
+                // program's all function stop and open options window.
                 timer.Stop();
                 MouseDown -= MainWindow_MouseDown;
                 SettingsWindow w = new SettingsWindow();
                 w.ShowDialog();
+                // reload this program
                 this.Window_Loaded(this, new RoutedEventArgs());
             };
 
@@ -110,6 +115,7 @@ namespace WindowSpriteAnimationFloating
             menu.MenuItems.AddRange(new MenuItem[] { item, item2 });
             noti.ContextMenu = menu;
         }
+        #endregion
 
         // Timer funciton.
         private void NextFrame(object sender, EventArgs e)
@@ -137,6 +143,7 @@ namespace WindowSpriteAnimationFloating
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // if image path is not currectly, set basic path
             if (globalClass.ImagePath == "" || !File.Exists(globalClass.ImagePath))
                 globalClass.ImagePath = System.Windows.Forms.Application.StartupPath + @"\..\..\Resource\icons8_asteroid_64.png";
 
@@ -146,9 +153,11 @@ namespace WindowSpriteAnimationFloating
             frames = new Bitmap[globalClass.SpriteCount];
             imgFrame = new ImageSource[globalClass.SpriteCount];
 
+            // calculate each frame image size - width, height
             int spriteWidth = original.Width / (globalClass.SpriteCount / globalClass.SpriteRowCount);
             int spriteHeight = original.Height / globalClass.SpriteRowCount;
 
+            // if size mode is manual mode
             if(globalClass.ManualSizeChange)
             {
                 spriteWidth = globalClass.ManualWidth;
@@ -157,45 +166,56 @@ namespace WindowSpriteAnimationFloating
 
             for (int i = 0; i < globalClass.SpriteCount; i++)
             {
-                int yHeight = 0;
+                // ``` y posision
+                int heightPos = 0;
+                // ``` x position
                 int widthPos = i;
+                // current row count
                 int currRowCnt = i / (globalClass.SpriteCount / globalClass.SpriteRowCount);
 
-                yHeight = spriteHeight * currRowCnt;
+                // y position is each frames height * now frames row index
+                heightPos = spriteHeight * currRowCnt;
 
+                // if size mde is manual mode
                 if(globalClass.ManualSizeChange)
                 {
-                    yHeight = spriteHeight * (globalClass.ManualStartRowPoint + currRowCnt);
+                    // y position is each frames height * (now frames row index + start frames row index)
+                    heightPos = spriteHeight * (globalClass.ManualStartRowPoint + currRowCnt);
                 }
 
+                // x position is each frames width * (now frames index - 1 rows total count)
                 if(i >= (globalClass.SpriteCount / globalClass.SpriteRowCount))
                     widthPos = i - ((globalClass.SpriteCount / globalClass.SpriteRowCount) * currRowCnt);
 
                 frames[i] = new Bitmap(spriteWidth, spriteHeight);
                 using (Graphics g = Graphics.FromImage(frames[i]))
                 {
-                    // Get designated position image in original image
-                    g.DrawImage(original, new Rectangle(0, 0, spriteWidth, spriteHeight), new Rectangle(widthPos * spriteWidth, yHeight, spriteWidth, spriteHeight), GraphicsUnit.Pixel);
+                    // Get frame in original image
+                    g.DrawImage(original, new Rectangle(0, 0, spriteWidth, spriteHeight), new Rectangle(widthPos * spriteWidth, heightPos, spriteWidth, spriteHeight), GraphicsUnit.Pixel);
 
                     var handler = frames[i].GetHbitmap();
                     try
                     {
+                        // frame image convert to image source
                         imgFrame[i] = Imaging.CreateBitmapSourceFromHBitmap(handler, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
                     }
                     finally { DeleteObject(handler); }
                 }
             }
 
+            // frames change timer
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(globalClass.SpriteNextTime);
             timer.Tick += NextFrame;
             timer.Start();
 
+            // animation can move by drag n drop
             MouseDown += MainWindow_MouseDown;
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
+            // clear timer
             if(timer != null && timer.IsEnabled)
             {
                 timer.Stop();
@@ -207,15 +227,19 @@ namespace WindowSpriteAnimationFloating
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            // system tray icon remove
             if (noti != null)
             {
                 noti.Visible = false;
                 noti.Icon = null;
+                noti.Dispose();
             }
         }
 
         private void Window_StateChanged(object sender, EventArgs e)
         {
+            // program can not change state
+            // if window state is changed to maximized, frames image size changed
             if (this.WindowState == WindowState.Maximized) this.WindowState = WindowState.Normal;
         }
     }

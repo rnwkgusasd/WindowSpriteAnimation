@@ -60,7 +60,7 @@ namespace WindowSpriteAnimationFloating {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/WindowSpriteAnimationFloating;component/src/mainwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/AniSpri;component/src/mainwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\src\MainWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

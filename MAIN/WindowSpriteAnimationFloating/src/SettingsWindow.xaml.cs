@@ -43,6 +43,7 @@ namespace WindowSpriteAnimationFloating
                 string[] arr = new string[] { "IMAGEPATH=" + ImagePath.Text, "SPRITECOUNT=" + SpriteCount.Text, "SPRITEROWCOUNT=" + SpriteRowCount.Text, "SPRITENEXTTIME=" + SpriteNextTime.Text };
                 string[] manual = new string[] { "MANUALSIZECHANGE=" + cbSize.IsChecked?.ToString(), "MANUALWIDTH=" + xSize.Text, "MANUALHEIGHT=" + ySize.Text, "MANUALSTARTROW=" + rowStart.Text };
 
+                // options.txt file save  program file path\CONFIG\options.txt 
                 FileInfo file = new FileInfo(System.Windows.Forms.Application.StartupPath + "\\CONFIG\\options.txt");
 
                 if (!file.Directory.Exists) file.Directory.Create();
@@ -62,6 +63,7 @@ namespace WindowSpriteAnimationFloating
                     }
                 }
 
+                // options value to global variables
                 globalClass.ImagePath = ImagePath.Text;
                 globalClass.SpriteCount = int.Parse(SpriteCount.Text);
                 globalClass.SpriteRowCount = int.Parse(SpriteRowCount.Text);
